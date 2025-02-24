@@ -1,0 +1,7 @@
+node_modules
+.env
+export.sh
+
+# TODO: remove from gitignore later
+.kamal
+config/deploy.yml
