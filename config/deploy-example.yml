@@ -1,0 +1,36 @@
+service: stillhope
+
+image: <%= ENV["KAMAL_REGISTRY_IMAGE"] %>
+
+servers:
+  web:
+    - <%= ENV["HOST_IP"] %>
+
+# Enable SSL auto certification via Let's Encrypt and allow for multiple apps on a single web server.
+# Remove this section when using multiple web servers and ensure you terminate SSL at your load balancer.
+#
+# Note: If using Cloudflare, set encryption mode in SSL/TLS setting to "Full" to enable CF-to-app encryption.
+proxy:
+  ssl: true
+  host: <%= ENV["HOST_DOMAIN"] %>
+  # Proxy connects to your container on port 80 by default.
+  app_port: 3000
+
+registry:
+  username: <%= ENV["KAMAL_REGISTRY_USER"] %>
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+builder:
+  arch: amd64
+
+env:
+  clear:
+    SECRET_ONE: world
+
+aliases:
+  shell: app exec --interactive --reuse "bash"
+  logs: app logs
+
+ssh:
+  user: <%= ENV["SSH_USER"] %>
