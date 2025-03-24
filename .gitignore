@@ -1,6 +1,8 @@
 node_modules
 .env
-export.sh
+env.sh
+env.temp
+
 
 # TODO: remove from gitignore later
 .kamal
